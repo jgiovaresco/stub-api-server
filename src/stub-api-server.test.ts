@@ -13,7 +13,15 @@ describe('stub-api-server should', () => {
     stub = new StubApiServer({ port: 4444 });
     await stub.start();
 
-    const response = await agent('http://localhost:4444').get('/');
+    const response = await agent(stub.listeningUrl()).get('/');
+    expect(response.status).toBeNumber();
+  });
+
+  it('start an http server random port', async () => {
+    stub = new StubApiServer();
+    await stub.start();
+
+    const response = await agent(stub.listeningUrl()).get('/');
     expect(response.status).toBeNumber();
   });
 });
