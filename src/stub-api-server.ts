@@ -1,11 +1,17 @@
 import { Server, createServer } from 'http';
 
-import Koa from 'koa';
+import Koa, { ExtendableContext } from 'koa';
 import { isNil } from 'lodash';
 import { getPortPromise } from 'portfinder';
 
+import { buildFromRouteConfig, RouteConfig } from './routes-builder';
+
 export type StubApiServerOptions = {
   port?: number;
+};
+
+const UNMATCHED_ROUTE_MIDDLEWARE = (ctx: ExtendableContext) => {
+  ctx.status = 501;
 };
 
 export class StubApiServer {
@@ -15,10 +21,13 @@ export class StubApiServer {
 
   constructor(private readonly options?: StubApiServerOptions) {
     this.app = new Koa();
+  }
 
-    this.app.use(ctx => {
-      ctx.status = 501;
-    });
+  public useRoutes(routes: RouteConfig[]) {
+    [...buildFromRouteConfig(routes), UNMATCHED_ROUTE_MIDDLEWARE].map(r =>
+      this.app.use(r),
+    );
+    return this;
   }
 
   public async start() {

@@ -1,5 +1,6 @@
 import { agent } from 'supertest';
 
+import { RouteConfig } from './routes-builder';
 import { StubApiServer } from './stub-api-server';
 
 describe('stub-api-server should', () => {
@@ -9,8 +10,11 @@ describe('stub-api-server should', () => {
     await stub.stop();
   });
 
-  async function start(port?: number) {
-    stub = new StubApiServer({ port });
+  async function start(
+    port?: number,
+    routes: RouteConfig[] = [],
+  ) {
+    stub = new StubApiServer({ port }).useRoutes(routes);
     await stub.start();
   }
 
@@ -33,5 +37,20 @@ describe('stub-api-server should', () => {
 
     const response = await agent(stub.listeningUrl()).get('/');
     expect(response.status).toBe(501);
+  });
+
+  it('responds to a GET request configured', async () => {
+    const routes = [
+      {
+        method: 'GET',
+        path: '/hello',
+        template: { message: 'Hello World' },
+      },
+    ];
+    await start(4444, routes);
+
+    const response = await agent(stub.listeningUrl()).get('/hello');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ message: 'Hello World' });
   });
 });

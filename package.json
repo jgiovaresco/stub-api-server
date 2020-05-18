@@ -60,7 +60,9 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
+    "@types/koa-router": "^7.4.1",
     "koa": "^2.12.0",
+    "koa-router": "^8.0.8",
     "lodash": "^4.17.15",
     "portfinder": "^1.0.26"
   }
