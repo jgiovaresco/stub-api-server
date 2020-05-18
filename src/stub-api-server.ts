@@ -15,6 +15,10 @@ export class StubApiServer {
 
   constructor(private readonly options?: StubApiServerOptions) {
     this.app = new Koa();
+
+    this.app.use(ctx => {
+      ctx.status = 501;
+    });
   }
 
   public async start() {

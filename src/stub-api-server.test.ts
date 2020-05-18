@@ -24,4 +24,12 @@ describe('stub-api-server should', () => {
     const response = await agent(stub.listeningUrl()).get('/');
     expect(response.status).toBeNumber();
   });
+
+  it('by default responds 501 on all requests', async () => {
+    stub = new StubApiServer();
+    await stub.start();
+
+    const response = await agent(stub.listeningUrl()).get('/');
+    expect(response.status).toBe(501);
+  });
 });
