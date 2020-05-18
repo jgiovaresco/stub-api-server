@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+dist
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+# IDEs
+## Web storm files
+.idea/
+## VS workspace settings
+.vscode/
+
+# OSX custom attributes files
+.DS_Store
+
+# Coverage report files
+coverage*
+
+# Docker production environment
+.env.*
