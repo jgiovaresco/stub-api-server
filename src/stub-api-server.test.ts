@@ -9,25 +9,27 @@ describe('stub-api-server should', () => {
     await stub.stop();
   });
 
-  it('start an http server using the provided port', async () => {
-    stub = new StubApiServer({ port: 4444 });
+  async function start(port?: number) {
+    stub = new StubApiServer({ port });
     await stub.start();
+  }
+
+  it('start an http server using the provided port', async () => {
+    await start(4444);
 
     const response = await agent(stub.listeningUrl()).get('/');
     expect(response.status).toBeNumber();
   });
 
   it('start an http server random port', async () => {
-    stub = new StubApiServer();
-    await stub.start();
+    await start();
 
     const response = await agent(stub.listeningUrl()).get('/');
     expect(response.status).toBeNumber();
   });
 
   it('by default responds 501 on all requests', async () => {
-    stub = new StubApiServer();
-    await stub.start();
+    await start();
 
     const response = await agent(stub.listeningUrl()).get('/');
     expect(response.status).toBe(501);
