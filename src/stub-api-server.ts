@@ -4,7 +4,8 @@ import Koa, { ExtendableContext } from 'koa';
 import { isNil } from 'lodash';
 import { getPortPromise } from 'portfinder';
 
-import { buildFromDirectory, buildFromRouteConfig, RouteConfig } from './routes-builder';
+import { buildFromDirectory, buildFromRouteConfig } from './route-builder';
+import { RouteConfig } from './route-config';
 
 export type StubApiServerOptions = {
   port?: number;

@@ -2,7 +2,7 @@ import path  from 'path';
 
 import { agent } from 'supertest';
 
-import { RouteConfig } from './routes-builder';
+import { RouteConfig } from './route-config';
 import { StubApiServer } from './stub-api-server';
 
 describe('stub-api-server should', () => {

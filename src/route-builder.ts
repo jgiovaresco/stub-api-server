@@ -4,11 +4,8 @@ import globby from 'globby';
 import Router from 'koa-router';
 import { has } from 'lodash';
 
-export type RouteConfig = {
-  method: string;
-  path: string;
-  template: unknown;
-};
+import { ResponseGenerator } from './response-generator';
+import { RouteConfig } from './route-config';
 
 export function buildFromRouteConfig(routes: RouteConfig[]) {
   return routes.map(route => routerFromConfig(route).routes());
@@ -24,9 +21,12 @@ export async function buildFromDirectory(path: string) {
 
 function routerFromConfig(config: RouteConfig) {
   const router = new Router({ methods: [config.method] });
+  const generator = new ResponseGenerator(config);
+
   router.all(config.path, ctx => {
-    ctx.status = 200;
-    ctx.body = config.template;
+    const response = generator.generate();
+    ctx.status = response.status;
+    ctx.body = response.body;
   });
   return router;
 }
