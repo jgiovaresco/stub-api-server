@@ -4,7 +4,7 @@ import Koa, { ExtendableContext } from 'koa';
 import { isNil } from 'lodash';
 import { getPortPromise } from 'portfinder';
 
-import { buildFromRouteConfig, RouteConfig } from './routes-builder';
+import { buildFromDirectory, buildFromRouteConfig, RouteConfig } from './routes-builder';
 
 export type StubApiServerOptions = {
   port?: number;
@@ -27,6 +27,12 @@ export class StubApiServer {
     [...buildFromRouteConfig(routes), UNMATCHED_ROUTE_MIDDLEWARE].map(r =>
       this.app.use(r),
     );
+    return this;
+  }
+
+  public async useRoutesFromDir(path: string) {
+    const routes = await buildFromDirectory(path);
+    [...routes, UNMATCHED_ROUTE_MIDDLEWARE].map(r => this.app.use(r));
     return this;
   }
 

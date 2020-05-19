@@ -1,3 +1,5 @@
+import path  from 'path';
+
 import { agent } from 'supertest';
 
 import { RouteConfig } from './routes-builder';
@@ -7,13 +9,12 @@ describe('stub-api-server should', () => {
   let stub: StubApiServer;
 
   afterEach(async () => {
-    await stub.stop();
+    if (stub) {
+      await stub.stop();
+    }
   });
 
-  async function start(
-    port?: number,
-    routes: RouteConfig[] = [],
-  ) {
+  async function start(port?: number, routes: RouteConfig[] = []) {
     stub = new StubApiServer({ port }).useRoutes(routes);
     await stub.start();
   }
@@ -39,7 +40,7 @@ describe('stub-api-server should', () => {
     expect(response.status).toBe(501);
   });
 
-  it('responds to a GET request configured', async () => {
+  it('load routes provided', async () => {
     const routes = [
       {
         method: 'GET',
@@ -52,5 +53,17 @@ describe('stub-api-server should', () => {
     const response = await agent(stub.listeningUrl()).get('/hello');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ message: 'Hello World' });
+  });
+
+  it('load routes from directory', async () => {
+    stub = await new StubApiServer().useRoutesFromDir(path.resolve('./test/stub-config'));
+    await stub.start();
+    const stubServer = agent(stub.listeningUrl());
+
+    let response = await stubServer.get('/route1');
+    expect(response.body).toEqual({ message: 'route1' });
+
+    response = await stubServer.get('/a/route2');
+    expect(response.body).toEqual({ message: 'route2' });
   });
 });
