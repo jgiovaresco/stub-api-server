@@ -23,8 +23,8 @@ function routerFromConfig(config: RouteConfig) {
   const router = new Router({ methods: [config.method] });
   const generator = new ResponseGenerator(config);
 
-  router.all(config.path, ctx => {
-    const response = generator.generate();
+  router.all(config.path, async ctx => {
+    const response = await generator.generate(ctx);
     ctx.status = response.status;
     ctx.body = response.body;
   });
