@@ -33,16 +33,42 @@ describe('RouteGenerator should', () => {
     expect(await generatedBody(null, context)).toEqual(null);
   });
 
-  it('process object templates', async () => {
-    const context = createMockContext();
-    const template = { message: 'Hello World' };
-    const templateDeep = { root: { msg: 'Hello' } };
+  describe('process object templates', () => {
+    it('using simple values', async () => {
+      const context = createMockContext();
+      const template = { message: 'Hello World' };
+      const templateDeep = { root: { msg: 'Hello' } };
 
-    expect(await generatedBody(template, context)).toEqual({
-      message: 'Hello World',
+      expect(await generatedBody(template, context)).toEqual({
+        message: 'Hello World',
+      });
+      expect(await generatedBody(templateDeep, context)).toEqual({
+        root: { msg: 'Hello' },
+      });
     });
-    expect(await generatedBody(templateDeep, context)).toEqual({
-      root: { msg: 'Hello' },
+
+    it('using functions with query provided', async () => {
+      type QueryParam = { name: string };
+      const template = {
+        message: (q: QueryParam) => `Hello ${q.name}`,
+      };
+      const context = createMockContext({ url: 'hello?name=John' });
+
+      expect(await generatedBody(template, context)).toEqual({
+        message: 'Hello John',
+      });
+    });
+
+    it('using functions with request body provided', async () => {
+      type Body = { name: string };
+      const template = {
+        message: (query: unknown, body: Body) => `Hello ${body.name}`,
+      };
+      const context = createMockContext({ requestBody: { name: 'John' } });
+
+      expect(await generatedBody(template, context)).toEqual({
+        message: 'Hello John',
+      });
     });
   });
 

@@ -6,10 +6,14 @@ export type RouteConfig = {
 
 export type TemplateLeafValue = string | boolean | number | null | object;
 
-export type TemplateObject = { [key in string]: TemplateLeafValue };
 export type TemplateFunction = (
   query?: object,
   body?: object,
 ) => TemplateLeafValue;
+
+export type TemplateObjectValue = TemplateLeafValue | TemplateFunction;
+export type TemplateObject = {
+  [key in string]: TemplateObjectValue;
+};
 
 export type Template = TemplateLeafValue | TemplateObject | TemplateFunction;
