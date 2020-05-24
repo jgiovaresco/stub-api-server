@@ -31,8 +31,14 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: true
 
-      - name: Unit tests
+      - name: Tests with coverage
         run: |
-          yarn test
+          yarn test:cov
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.7
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage/clover.xml
+          name: codecov-umbrella
 

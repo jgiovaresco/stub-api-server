@@ -11,7 +11,8 @@
     "lint:eslint": "eslint --ext ts .",
     "lint:prettier": "prettier {src,test}/**.*",
     "lint:prettier:fix": "prettier --write {src,test}/**.*",
-    "test": "jest --color --forceExit"
+    "test": "jest --color --forceExit",
+    "test:cov": "yarn test --coverage"
   },
   "commitlint": {
     "extends": [
