@@ -1,9 +1,13 @@
 {
   "name": "stub-api-server",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "description": "Stub REST api with fake JSON",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jgiovaresco/stub-api-server.git"
+  },
   "scripts": {
     "build": "tsc",
     "lint": "yarn lint:eslint && yarn lint:commit && yarn lint:prettier",
@@ -11,6 +15,7 @@
     "lint:eslint": "eslint --ext ts .",
     "lint:prettier": "prettier {src,test}/**.*",
     "lint:prettier:fix": "prettier --write {src,test}/**.*",
+    "release": "semantic-release",
     "test": "jest --color --forceExit",
     "test:cov": "yarn test --coverage"
   },
@@ -37,6 +42,12 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.0.7",
+    "@semantic-release/npm": "^7.0.5",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "@shopify/jest-koa-mocks": "^2.2.2",
     "@types/bluebird": "^3.5.32",
     "@types/jest": "^25.2.2",
@@ -45,6 +56,7 @@
     "@types/supertest": "^2.0.9",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
+    "conventional-changelog-conventionalcommits": "^4.3.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-typescript": "^2.0.0",
@@ -57,6 +69,7 @@
     "jest-extended": "^0.11.5",
     "lint-staged": "^10.2.2",
     "prettier": "^2.0.5",
+    "semantic-release": "^17.0.7",
     "supertest": "^4.0.2",
     "ts-jest": "^26.0.0",
     "ts-node": "^8.10.1",
