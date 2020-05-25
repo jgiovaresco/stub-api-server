@@ -2,7 +2,8 @@
   "name": "stub-api-server",
   "version": "0.0.0-development",
   "description": "Stub REST api with fake JSON",
-  "main": "index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "license": "MIT",
   "repository": {
     "type": "git",

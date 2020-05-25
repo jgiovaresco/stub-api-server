@@ -4,6 +4,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "incremental": true,
+    "declaration": true,
     "outDir": "dist",
 
     /* Strict Type-Checking Options */
