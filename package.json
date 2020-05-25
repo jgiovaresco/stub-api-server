@@ -16,6 +16,7 @@
     "lint:eslint": "eslint --ext ts .",
     "lint:prettier": "prettier {src,test}/**.*",
     "lint:prettier:fix": "prettier --write {src,test}/**.*",
+    "prepublishOnly": "yarn build",
     "release": "semantic-release",
     "test": "jest --color --forceExit",
     "test:cov": "yarn test --coverage"

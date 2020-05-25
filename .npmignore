@@ -1,0 +1,17 @@
+.editorconfig
+.eslintrc.js
+.github
+.gitignore
+.idea
+.nvmrc
+.prettierrc.js
+
+coverage
+
+dist/src/**/*.test.js
+dist/test
+dist/tsconfig.tsbuildinfo
+
+jest.config.js
+release.config.js
+tsconfig.json
