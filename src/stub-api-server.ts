@@ -45,6 +45,7 @@ export class StubApiServer {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       this.server = createServer(this.app.callback());
+      console.info(`Starting server on ${this.listeningUrl()}`)
       this.server.listen(this.port, resolve).on('error', reject);
     });
   }
