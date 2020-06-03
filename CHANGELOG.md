@@ -1,3 +1,10 @@
+### [0.1.1](https://github.com/jgiovaresco/stub-api-server/compare/v0.1.0...v0.1.1) (2020-06-03)
+
+
+### Bug Fixes
+
+* export RouteConfig type ([944894e](https://github.com/jgiovaresco/stub-api-server/commit/944894e814b47d9e4acab57b8eda6554d5a5f488))
+
 ## 0.1.0 (2020-06-03)
 
 
