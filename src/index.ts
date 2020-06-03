@@ -1,1 +1,2 @@
-export * from './stub-api-server'
+export * from './route-config';
+export * from './stub-api-server';
