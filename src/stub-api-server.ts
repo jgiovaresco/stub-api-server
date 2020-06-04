@@ -1,6 +1,7 @@
 import { Server, createServer } from 'http';
 
 import Koa, { ExtendableContext } from 'koa';
+import bodyParser from 'koa-bodyparser';
 import { isNil } from 'lodash';
 import { getPortPromise } from 'portfinder';
 
@@ -25,6 +26,8 @@ export class StubApiServer {
   }
 
   public useRoutes(routes: RouteConfig[]) {
+    this.app.use(bodyParser());
+
     [...buildFromRouteConfig(routes), UNMATCHED_ROUTE_MIDDLEWARE].map(r =>
       this.app.use(r),
     );
@@ -45,7 +48,7 @@ export class StubApiServer {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       this.server = createServer(this.app.callback());
-      console.info(`Starting server on ${this.listeningUrl()}`)
+      console.info(`Starting server on ${this.listeningUrl()}`);
       this.server.listen(this.port, resolve).on('error', reject);
     });
   }
