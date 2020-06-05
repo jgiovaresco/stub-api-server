@@ -1,6 +1,7 @@
 export type RouteConfig = {
   method: string;
   path: string;
+  status?: StatusFn;
   template: Template;
 };
 
@@ -24,7 +25,7 @@ export type Route = {
   handler: (context: RequestContext<unknown>) => Promise<ResponseGenerated>;
 };
 
-export type StatusFn = () => number;
+export type StatusFn = (ctx: RequestContext<unknown>) => number;
 
 export type TemplateLeafValue = string | boolean | number | null | object;
 

@@ -1,10 +1,6 @@
-import {
-  ResponseGenerated,
-  RouteConfig,
-  RequestContext,
-} from './route-config';
+import { ResponseGenerated, RouteConfig, RequestContext } from './route-config';
 
-import { processTemplate } from './processors';
+import { defaultStatus, processStatus, processTemplate } from './processors';
 
 export class ResponseGenerator {
   constructor(private readonly config: RouteConfig) {}
@@ -13,7 +9,7 @@ export class ResponseGenerator {
     context: RequestContext<unknown>,
   ): Promise<ResponseGenerated> {
     return {
-      status: 200,
+      status: processStatus(this.config.status || defaultStatus, context),
       body: await processTemplate(this.config.template, context),
     };
   }
