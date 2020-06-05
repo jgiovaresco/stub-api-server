@@ -4,11 +4,30 @@ export type RouteConfig = {
   template: Template;
 };
 
+export type RequestQuery = { [key: string]: string | string[] };
+export type RequestPayload = string | object;
+export type RouteHandlerContext = {
+  query?: RequestQuery;
+  payload?: RequestPayload;
+};
+export type ResponseGenerated = {
+  status: number;
+  body: unknown;
+};
+
+export type Route = {
+  method: string;
+  path: string;
+  handler: (context: RouteHandlerContext) => Promise<ResponseGenerated>;
+};
+
+export type StatusFn = () => number;
+
 export type TemplateLeafValue = string | boolean | number | null | object;
 
 export type TemplateFunction = (
-  query?: object,
-  body?: object,
+  query?: RequestQuery,
+  body?: RequestPayload,
 ) => TemplateLeafValue;
 
 export type TemplateObjectValue = TemplateLeafValue | TemplateFunction;

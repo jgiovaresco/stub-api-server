@@ -1,9 +1,13 @@
-import { createMockContext } from '@shopify/jest-koa-mocks';
 import Bluebird from 'bluebird';
-import { ExtendableContext } from 'koa';
 
 import { ResponseGenerator } from './response-generator';
-import { RouteConfig, Template } from './route-config';
+import {
+  RequestPayload,
+  RequestQuery,
+  RouteConfig,
+  RouteHandlerContext,
+  Template,
+} from './route-config';
 import { newRouteConfig } from '../test/fixtures';
 
 describe('RouteGenerator should', () => {
@@ -11,22 +15,26 @@ describe('RouteGenerator should', () => {
     return new ResponseGenerator(config);
   }
 
-  async function generatedBody(template: Template, context: ExtendableContext) {
+  async function generatedBody(template: Template, context: RouteHandlerContext) {
     const generator = aGeneratorFor(newRouteConfig({ template }));
     const response = await generator.generate(context);
     return response.body;
   }
 
+  function newContext(query?: RequestQuery, payload?: RequestPayload) {
+    return { query, payload };
+  }
+
   it('generate a 200 response by default', async () => {
     const route = newRouteConfig({ template: 'Hello World' });
-    const context = createMockContext();
+    const context = newContext();
 
     const response = await aGeneratorFor(route).generate(context);
     expect(response.status).toBe(200);
   });
 
   it('process a simple value template', async () => {
-    const context = createMockContext();
+    const context = newContext();
     expect(await generatedBody(true, context)).toEqual(true);
     expect(await generatedBody('Hello World', context)).toEqual('Hello World');
     expect(await generatedBody(123, context)).toEqual(123);
@@ -35,7 +43,7 @@ describe('RouteGenerator should', () => {
 
   describe('process object templates', () => {
     it('using simple values', async () => {
-      const context = createMockContext();
+      const context = {};
       const template = { message: 'Hello World' };
       const templateDeep = { root: { msg: 'Hello' } };
 
@@ -52,7 +60,7 @@ describe('RouteGenerator should', () => {
       const template = {
         message: (q: QueryParam) => `Hello ${q.name}`,
       };
-      const context = createMockContext({ url: 'hello?name=John' });
+      const context = { query: { name: 'John' } };
 
       expect(await generatedBody(template, context)).toEqual({
         message: 'Hello John',
@@ -64,7 +72,7 @@ describe('RouteGenerator should', () => {
       const template = {
         message: (query: unknown, body: Body) => `Hello ${body.name}`,
       };
-      const context = createMockContext({ requestBody: { name: 'John' } });
+      const context = { payload: { name: 'John' } };
 
       expect(await generatedBody(template, context)).toEqual({
         message: 'Hello John',
@@ -76,7 +84,7 @@ describe('RouteGenerator should', () => {
     it('using query provided', async () => {
       type QueryParam = { name: string };
       const template = (query: QueryParam) => `Hello ${query.name}`;
-      const context = createMockContext({ url: 'hello?name=John' });
+      const context = { query: { name: 'John' } };
 
       expect(await generatedBody(template, context)).toEqual('Hello John');
     });
@@ -84,14 +92,14 @@ describe('RouteGenerator should', () => {
     it('using request body provided', async () => {
       type Body = { name: string };
       const template = (query: unknown, body: Body) => `Hello ${body.name}`;
-      const context = createMockContext({ requestBody: { name: 'John' } });
+      const context = { payload: { name: 'John' } };
 
       expect(await generatedBody(template, context)).toEqual('Hello John');
     });
 
     it('using async function', async () => {
       const template = () => Bluebird.delay(10).then(() => 'Hello World');
-      const context = createMockContext({});
+      const context = {};
 
       expect(await generatedBody(template, context)).toEqual('Hello World');
     });

@@ -1,26 +1,22 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import Bluebird from 'bluebird';
-import { ExtendableContext } from 'koa';
 import { isFunction, isPlainObject } from 'lodash';
 
 import {
+  ResponseGenerated,
+  RequestPayload,
+  RequestQuery,
   RouteConfig,
+  RouteHandlerContext,
   Template,
   TemplateObject,
   TemplateObjectValue,
 } from './route-config';
 
-export type ResponseGenerated = {
-  status: number;
-  body: unknown;
-};
-
 export class ResponseGenerator {
   constructor(private readonly config: RouteConfig) {}
 
-  public async generate(
-    context: ExtendableContext,
-  ): Promise<ResponseGenerated> {
+  public async generate(context: RouteHandlerContext): Promise<ResponseGenerated> {
     return {
       status: 200,
       body: await process(this.config.template, context),
@@ -28,10 +24,7 @@ export class ResponseGenerator {
   }
 }
 
-function process(
-  template: Template,
-  context: ExtendableContext,
-): Promise<unknown> {
+function process(template: Template, context: RouteHandlerContext): Promise<unknown> {
   let result: unknown = template;
 
   if (isFunction(template)) {
@@ -53,9 +46,10 @@ function process(
   return result;
 }
 
-function extractTemplateFunctionParams(context: ExtendableContext) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return [context.query, (context.request as any).body];
+function extractTemplateFunctionParams(
+  context: RouteHandlerContext,
+): [RequestQuery | undefined, RequestPayload | undefined] {
+  return [context.query, context.payload];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,7 +62,7 @@ function isTemplateObject(value: any): value is TemplateObject {
   return isPlainObject(value);
 }
 
-function processObjectKey(context: ExtendableContext) {
+function processObjectKey(context: RouteHandlerContext) {
   return async (
     result: TemplateObject,
     [key, value]: [string, TemplateObjectValue],

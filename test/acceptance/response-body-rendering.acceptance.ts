@@ -43,7 +43,7 @@ describe('stub-api-server should', () => {
       sub: {
         simple: 'Hello World',
         func: 'Hello John',
-      }
+      },
     });
   });
 
@@ -67,16 +67,20 @@ describe('stub-api-server should', () => {
     ];
     await start(routes);
 
-    const response = await agent(stub.listeningUrl()).post('/hello?name=John').send({
-      greetingWord: 'Bonjour'
-    });
+    const response = await agent(stub.listeningUrl())
+      .post('/hello?name=John')
+      .send({
+        greetingWord: 'Bonjour',
+      });
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({  simple: 'Hello World',
+    expect(response.body).toEqual({
+      simple: 'Hello World',
       func: 'Hello John',
       sub: {
         simple: 'Hello World',
         func: 'Bonjour John',
-      } });
+      },
+    });
   });
 
   it('render a PUT template', async () => {
@@ -99,16 +103,20 @@ describe('stub-api-server should', () => {
     ];
     await start(routes);
 
-    const response = await agent(stub.listeningUrl()).patch('/hello?name=John').send({
-      greetingWord: 'Bonjour'
-    });
+    const response = await agent(stub.listeningUrl())
+      .put('/hello?name=John')
+      .send({
+        greetingWord: 'Bonjour',
+      });
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({  simple: 'Hello World',
+    expect(response.body).toEqual({
+      simple: 'Hello World',
       func: 'Hello John',
       sub: {
         simple: 'Hello World',
         func: 'Bonjour John',
-      } });
+      },
+    });
   });
 
   it('render a PATCH template', async () => {
@@ -131,15 +139,19 @@ describe('stub-api-server should', () => {
     ];
     await start(routes);
 
-    const response = await agent(stub.listeningUrl()).patch('/hello?name=John').send({
-      greetingWord: 'Bonjour'
-    });
+    const response = await agent(stub.listeningUrl())
+      .patch('/hello?name=John')
+      .send({
+        greetingWord: 'Bonjour',
+      });
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({  simple: 'Hello World',
+    expect(response.body).toEqual({
+      simple: 'Hello World',
       func: 'Hello John',
       sub: {
         simple: 'Hello World',
         func: 'Bonjour John',
-      } });
+      },
+    });
   });
 });

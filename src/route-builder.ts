@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import Bluebird from 'bluebird';
 import globby from 'globby';
-import Router from 'koa-router';
 import { has } from 'lodash';
 
 import { ResponseGenerator } from './response-generator';
-import { RouteConfig } from './route-config';
+import { Route, RouteConfig } from './route-config';
 
 export function buildFromRouteConfig(routes: RouteConfig[]) {
-  return routes.map(route => routerFromConfig(route).routes());
+  return routes.map(route => routerFromConfig(route));
 }
 
 export async function buildFromDirectory(path: string) {
@@ -16,17 +15,17 @@ export async function buildFromDirectory(path: string) {
 
   return Bluebird.map(files, f => import(f))
     .filter(def => has(def, 'default'))
-    .map(def => routerFromConfig(def.default).routes());
+    .map(def => routerFromConfig(def.default));
 }
 
-function routerFromConfig(config: RouteConfig) {
-  const router = new Router({ methods: [config.method] });
+function routerFromConfig(config: RouteConfig): Route {
   const generator = new ResponseGenerator(config);
 
-  router.all(config.path, async ctx => {
-    const response = await generator.generate(ctx);
-    ctx.status = response.status;
-    ctx.body = response.body;
-  });
-  return router;
+  return {
+    method: config.method,
+    path: config.path,
+    handler: context => {
+      return generator.generate(context);
+    },
+  };
 }
