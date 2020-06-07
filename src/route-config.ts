@@ -4,10 +4,12 @@ export type RouteConfig = {
   template: Template;
 };
 
+export type RequestParams = Record<string, string>;
 export type RequestQuery = { [key: string]: string | string[] };
 export type RequestPayload<T> = T;
 
 export type RequestContext<T> = {
+  params?: RequestParams;
   query?: RequestQuery;
   payload?: RequestPayload<T>;
 };

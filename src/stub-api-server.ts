@@ -55,6 +55,7 @@ export class StubApiServer {
       path: r.path,
       handler: async (request, h) => {
         const res = await r.handler({
+          params: request.params,
           query: request.query,
           payload: request.payload,
         });

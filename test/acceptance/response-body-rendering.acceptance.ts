@@ -19,6 +19,7 @@ describe('stub-api-server should', () => {
   type Body = { greetingWord: string };
   const template = {
     simple: 'Hello World',
+    withRequestParam: (ctx: RequestContext<Body>) => ctx.params?.gender,
     func: (ctx: RequestContext<Body>) => `Hello ${ctx.query?.name}`,
     sub: {
       simple: 'Hello World',
@@ -33,16 +34,19 @@ describe('stub-api-server should', () => {
     const routes = [
       {
         method: 'GET',
-        path: '/hello',
+        path: '/hello/{gender}',
         template,
       },
     ];
     await start(routes);
 
-    const response = await agent(stub.listeningUrl()).get('/hello?name=John');
+    const response = await agent(stub.listeningUrl()).get(
+      '/hello/mr?name=John',
+    );
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
       simple: 'Hello World',
+      withRequestParam: 'mr',
       func: 'Hello John',
       sub: {
         simple: 'Hello World',
