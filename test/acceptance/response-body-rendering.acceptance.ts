@@ -1,6 +1,6 @@
 import { agent } from 'supertest';
 
-import { RequestQuery, RouteConfig, StubApiServer } from '../../src';
+import { RequestContext, RouteConfig, StubApiServer } from '../../src';
 
 describe('stub-api-server should', () => {
   let stub: StubApiServer;
@@ -19,11 +19,13 @@ describe('stub-api-server should', () => {
   type Body = { greetingWord: string };
   const template = {
     simple: 'Hello World',
-    func: (q: RequestQuery) => `Hello ${q.name}`,
+    func: (ctx: RequestContext<Body>) => `Hello ${ctx.query?.name}`,
     sub: {
       simple: 'Hello World',
-      func: (q: RequestQuery, b: Body) =>
-        `${b ? b.greetingWord : 'Hello'} ${q.name}`,
+      func: (ctx: RequestContext<Body>) =>
+        `${ctx.payload ? ctx.payload.greetingWord : 'Hello'} ${
+          ctx.query?.name
+        }`,
     },
   };
 

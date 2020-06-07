@@ -27,8 +27,7 @@ export type StatusFn = () => number;
 export type TemplateLeafValue = string | boolean | number | null | object;
 
 export type TemplateFunction = (
-  query?: RequestQuery,
-  body?: RequestPayload<unknown>,
+  context: RequestContext<unknown>,
 ) => TemplateLeafValue;
 
 export type TemplateObjectValue = TemplateLeafValue | TemplateFunction;

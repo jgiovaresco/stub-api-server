@@ -59,9 +59,8 @@ describe('RouteGenerator should', () => {
     });
 
     it('using functions with query provided', async () => {
-      type QueryParam = { name: string };
       const template = {
-        message: (q: QueryParam) => `Hello ${q.name}`,
+        message: (ctx: RequestContext<unknown>) => `Hello ${ctx.query?.name}`,
       };
       const context = { query: { name: 'John' } };
 
@@ -73,7 +72,7 @@ describe('RouteGenerator should', () => {
     it('using functions with request body provided', async () => {
       type Body = { name: string };
       const template = {
-        message: (query: unknown, body: Body) => `Hello ${body.name}`,
+        message: (ctx: RequestContext<Body>) => `Hello ${ctx.payload?.name}`,
       };
       const context = { payload: { name: 'John' } };
 
@@ -85,8 +84,8 @@ describe('RouteGenerator should', () => {
 
   describe('process function templates', () => {
     it('using query provided', async () => {
-      type QueryParam = { name: string };
-      const template = (query: QueryParam) => `Hello ${query.name}`;
+      const template = (ctx: RequestContext<unknown>) =>
+        `Hello ${ctx.query?.name}`;
       const context = { query: { name: 'John' } };
 
       expect(await generatedBody(template, context)).toEqual('Hello John');
@@ -94,7 +93,8 @@ describe('RouteGenerator should', () => {
 
     it('using request body provided', async () => {
       type Body = { name: string };
-      const template = (query: unknown, body: Body) => `Hello ${body.name}`;
+      const template = (ctx: RequestContext<Body>) =>
+        `Hello ${ctx.payload?.name}`;
       const context = { payload: { name: 'John' } };
 
       expect(await generatedBody(template, context)).toEqual('Hello John');

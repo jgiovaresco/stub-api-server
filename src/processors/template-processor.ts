@@ -3,8 +3,6 @@ import Bluebird from 'bluebird';
 import { isFunction, isPlainObject } from 'lodash';
 
 import {
-  RequestPayload,
-  RequestQuery,
   RequestContext,
   Template,
   TemplateObject,
@@ -18,7 +16,7 @@ export function processTemplate(
   let result: unknown = template;
 
   if (isFunction(template)) {
-    result = template(...extractTemplateFunctionParams(context));
+    result = template(context);
   }
 
   if (isTemplateObject(template)) {
@@ -34,12 +32,6 @@ export function processTemplate(
   }
 
   return result;
-}
-
-function extractTemplateFunctionParams(
-  context: RequestContext<unknown>,
-): [RequestQuery | undefined, RequestPayload<unknown> | undefined] {
-  return [context.query, context.payload];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
