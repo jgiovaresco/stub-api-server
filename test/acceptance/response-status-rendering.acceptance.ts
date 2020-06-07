@@ -1,40 +1,19 @@
-import { agent } from 'supertest';
-
-import {
-  RequestContext,
-  RequestQuery,
-  RouteConfig,
-  StubApiServer,
-} from '../../src';
+import { RequestContext } from '../../src';
+import { SUT } from './sut';
 
 describe('stub-api-server should', () => {
-  let stub: StubApiServer;
-
+  let sut: SUT;
   type Body = { name: string };
 
-  afterEach(async () => {
-    if (stub) {
-      await stub.stop();
-    }
+  beforeEach(() => {
+    sut = new SUT();
   });
-
-  async function start(routes: RouteConfig[] = []) {
-    stub = new StubApiServer().useRoutes(routes);
-    await stub.start();
-  }
-
-  function get(url: string, query: RequestQuery = {}) {
-    return agent(stub.listeningUrl()).get(url).query(query);
-  }
-
-  function post(url: string, query: RequestQuery = {}, payload?: Body) {
-    return agent(stub.listeningUrl()).post(url).query(query).send(payload);
-  }
+  afterEach(() => sut.stop());
 
   it('render a 501 response if no route match', async () => {
-    await start([]);
+    await sut.start([]);
 
-    expect(await get('/hi')).toContainValue(501);
+    expect(await sut.get('/hi')).toHaveStatus(501);
   });
 
   it('render a 200 response by default', async () => {
@@ -45,9 +24,9 @@ describe('stub-api-server should', () => {
         template: true,
       },
     ];
-    await start(routes);
+    await sut.start(routes);
 
-    expect(await get('/hi')).toContainValue(200);
+    expect(await sut.get('/hi')).toHaveStatus(200);
   });
 
   it('render the overridden status', async () => {
@@ -59,9 +38,9 @@ describe('stub-api-server should', () => {
         template: true,
       },
     ];
-    await start(routes);
+    await sut.start(routes);
 
-    expect(await get('/hi', { name: 'John' })).toContainValue(201);
+    expect(await sut.get('/hi', { name: 'John' })).toHaveStatus(201);
   });
 
   it('render an overridden status using RequestContext', async () => {
@@ -79,11 +58,11 @@ describe('stub-api-server should', () => {
         template: true,
       },
     ];
-    await start(routes);
+    await sut.start(routes);
 
-    expect(await post('/hi/none')).toContainValue(200);
-    expect(await post('/hi/a', { name: 'John' })).toContainValue(201);
-    expect(await post('/hi/a', {}, { name: 'John' })).toContainValue(202);
-    expect(await post('/hi/a')).toContainValue(203);
+    expect(await sut.post('/hi/none')).toHaveStatus(200);
+    expect(await sut.post('/hi/a', { name: 'John' })).toHaveStatus(201);
+    expect(await sut.post('/hi/a', {}, { name: 'John' })).toHaveStatus(202);
+    expect(await sut.post('/hi/a')).toHaveStatus(203);
   });
 });

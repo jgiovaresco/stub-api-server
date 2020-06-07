@@ -1,21 +1,8 @@
-import { agent } from 'supertest';
-
-import { RequestContext, RouteConfig, StubApiServer } from '../../src';
+import { RequestContext } from '../../src';
+import { SUT } from './sut';
 
 describe('stub-api-server should', () => {
-  let stub: StubApiServer;
-
-  afterEach(async () => {
-    if (stub) {
-      await stub.stop();
-    }
-  });
-
-  async function start(routes: RouteConfig[] = []) {
-    stub = new StubApiServer().useRoutes(routes);
-    await stub.start();
-  }
-
+  let sut: SUT;
   type Body = { greetingWord: string };
   const template = {
     simple: 'Hello World',
@@ -30,103 +17,107 @@ describe('stub-api-server should', () => {
     },
   };
 
-  it('render GET template', async () => {
-    const routes = [
-      {
-        method: 'GET',
-        path: '/hello/{gender}',
-        template,
-      },
-    ];
-    await start(routes);
+  beforeEach(() => {
+    sut = new SUT();
+  });
+  afterEach(() => sut.stop());
 
-    const response = await agent(stub.listeningUrl()).get(
-      '/hello/mr?name=John',
-    );
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({
-      simple: 'Hello World',
-      withRequestParam: 'mr',
-      func: 'Hello John',
-      sub: {
+  describe('render simple template', () => {
+    it('using GET request', async () => {
+      const routes = [
+        {
+          method: 'GET',
+          path: '/hello/{gender}',
+          template,
+        },
+      ];
+      await sut.start(routes);
+
+      const response = await sut.get('/hello/mr', { name: 'John' });
+      expect(response).toHaveBody({
+        simple: 'Hello World',
+        withRequestParam: 'mr',
+        func: 'Hello John',
+        sub: {
+          simple: 'Hello World',
+          func: 'Hello John',
+        },
+      });
+    });
+
+    it('using POST request', async () => {
+      const routes = [
+        {
+          method: 'POST',
+          path: '/hello',
+          template,
+        },
+      ];
+      await sut.start(routes);
+
+      const response = await sut.post(
+        '/hello',
+        { name: 'John' },
+        { greetingWord: 'Bonjour' },
+      );
+      expect(response).toHaveBody({
         simple: 'Hello World',
         func: 'Hello John',
-      },
+        sub: {
+          simple: 'Hello World',
+          func: 'Bonjour John',
+        },
+      });
     });
-  });
 
-  it('render a POST template', async () => {
-    const routes = [
-      {
-        method: 'POST',
-        path: '/hello',
-        template,
-      },
-    ];
-    await start(routes);
+    it('using PUT request', async () => {
+      const routes = [
+        {
+          method: 'PUT',
+          path: '/hello',
+          template,
+        },
+      ];
+      await sut.start(routes);
 
-    const response = await agent(stub.listeningUrl())
-      .post('/hello?name=John')
-      .send({ greetingWord: 'Bonjour' });
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({
-      simple: 'Hello World',
-      func: 'Hello John',
-      sub: {
+      const response = await sut.put(
+        '/hello',
+        { name: 'John' },
+        { greetingWord: 'Bonjour' },
+      );
+      expect(response).toHaveBody({
         simple: 'Hello World',
-        func: 'Bonjour John',
-      },
+        func: 'Hello John',
+        sub: {
+          simple: 'Hello World',
+          func: 'Bonjour John',
+        },
+      });
     });
-  });
 
-  it('render a PUT template', async () => {
-    const routes = [
-      {
-        method: 'PUT',
-        path: '/hello',
-        template,
-      },
-    ];
-    await start(routes);
+    it('using PATCH request', async () => {
+      const routes = [
+        {
+          method: 'PATCH',
+          path: '/hello',
+          template,
+        },
+      ];
+      await sut.start(routes);
 
-    const response = await agent(stub.listeningUrl())
-      .put('/hello?name=John')
-      .send({ greetingWord: 'Bonjour' });
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({
-      simple: 'Hello World',
-      func: 'Hello John',
-      sub: {
+      const response = await sut.patch(
+        '/hello',
+        { name: 'John' },
+        { greetingWord: 'Bonjour' },
+      );
+      expect(response).toHaveBody({
         simple: 'Hello World',
-        func: 'Bonjour John',
-      },
-    });
-  });
-
-  it('render a PATCH template', async () => {
-    const routes = [
-      {
-        method: 'PATCH',
-        path: '/hello',
-        template,
-      },
-    ];
-    await start(routes);
-
-    const response = await agent(stub.listeningUrl())
-      .patch('/hello?name=John')
-      .send({ greetingWord: 'Bonjour' });
-
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({
-      simple: 'Hello World',
-      func: 'Hello John',
-      sub: {
-        simple: 'Hello World',
-        func: 'Bonjour John',
-      },
+        func: 'Hello John',
+        sub: {
+          simple: 'Hello World',
+          func: 'Bonjour John',
+        },
+      });
     });
   });
 });
