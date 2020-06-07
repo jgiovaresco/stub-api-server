@@ -5,7 +5,7 @@ import {
   RequestPayload,
   RequestQuery,
   RouteConfig,
-  RouteHandlerContext,
+  RequestContext,
   Template,
 } from './route-config';
 import { newRouteConfig } from '../test/fixtures';
@@ -15,7 +15,7 @@ describe('RouteGenerator should', () => {
     return new ResponseGenerator(config);
   }
 
-  async function generatedBody(template: Template, context: RouteHandlerContext) {
+  async function generatedBody(template: Template, context: RequestContext) {
     const generator = aGeneratorFor(newRouteConfig({ template }));
     const response = await generator.generate(context);
     return response.body;

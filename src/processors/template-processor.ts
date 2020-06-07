@@ -5,7 +5,7 @@ import { isFunction, isPlainObject } from 'lodash';
 import {
   RequestPayload,
   RequestQuery,
-  RouteHandlerContext,
+  RequestContext,
   Template,
   TemplateObject,
   TemplateObjectValue,
@@ -13,7 +13,7 @@ import {
 
 export function processTemplate(
   template: Template,
-  context: RouteHandlerContext,
+  context: RequestContext,
 ): Promise<unknown> {
   let result: unknown = template;
 
@@ -37,7 +37,7 @@ export function processTemplate(
 }
 
 function extractTemplateFunctionParams(
-  context: RouteHandlerContext,
+  context: RequestContext,
 ): [RequestQuery | undefined, RequestPayload | undefined] {
   return [context.query, context.payload];
 }
@@ -52,7 +52,7 @@ function isTemplateObject(value: any): value is TemplateObject {
   return isPlainObject(value);
 }
 
-function processObjectKey(context: RouteHandlerContext) {
+function processObjectKey(context: RequestContext) {
   return async (
     result: TemplateObject,
     [key, value]: [string, TemplateObjectValue],

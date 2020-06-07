@@ -1,7 +1,7 @@
 import {
   ResponseGenerated,
   RouteConfig,
-  RouteHandlerContext,
+  RequestContext,
 } from './route-config';
 
 import { processTemplate } from './processors';
@@ -10,7 +10,7 @@ export class ResponseGenerator {
   constructor(private readonly config: RouteConfig) {}
 
   public async generate(
-    context: RouteHandlerContext,
+    context: RequestContext,
   ): Promise<ResponseGenerated> {
     return {
       status: 200,

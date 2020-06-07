@@ -6,7 +6,8 @@ export type RouteConfig = {
 
 export type RequestQuery = { [key: string]: string | string[] };
 export type RequestPayload = string | object;
-export type RouteHandlerContext = {
+
+export type RequestContext = {
   query?: RequestQuery;
   payload?: RequestPayload;
 };
@@ -18,7 +19,7 @@ export type ResponseGenerated = {
 export type Route = {
   method: string;
   path: string;
-  handler: (context: RouteHandlerContext) => Promise<ResponseGenerated>;
+  handler: (context: RequestContext) => Promise<ResponseGenerated>;
 };
 
 export type StatusFn = () => number;
