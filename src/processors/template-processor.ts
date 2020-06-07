@@ -13,7 +13,7 @@ import {
 
 export function processTemplate(
   template: Template,
-  context: RequestContext,
+  context: RequestContext<unknown>,
 ): Promise<unknown> {
   let result: unknown = template;
 
@@ -37,8 +37,8 @@ export function processTemplate(
 }
 
 function extractTemplateFunctionParams(
-  context: RequestContext,
-): [RequestQuery | undefined, RequestPayload | undefined] {
+  context: RequestContext<unknown>,
+): [RequestQuery | undefined, RequestPayload<unknown> | undefined] {
   return [context.query, context.payload];
 }
 
@@ -52,7 +52,7 @@ function isTemplateObject(value: any): value is TemplateObject {
   return isPlainObject(value);
 }
 
-function processObjectKey(context: RequestContext) {
+function processObjectKey(context: RequestContext<unknown>) {
   return async (
     result: TemplateObject,
     [key, value]: [string, TemplateObjectValue],

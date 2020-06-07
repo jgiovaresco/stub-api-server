@@ -10,7 +10,7 @@ export class ResponseGenerator {
   constructor(private readonly config: RouteConfig) {}
 
   public async generate(
-    context: RequestContext,
+    context: RequestContext<unknown>,
   ): Promise<ResponseGenerated> {
     return {
       status: 200,

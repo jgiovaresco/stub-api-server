@@ -15,13 +15,16 @@ describe('RouteGenerator should', () => {
     return new ResponseGenerator(config);
   }
 
-  async function generatedBody(template: Template, context: RequestContext) {
+  async function generatedBody(
+    template: Template,
+    context: RequestContext<unknown>,
+  ) {
     const generator = aGeneratorFor(newRouteConfig({ template }));
     const response = await generator.generate(context);
     return response.body;
   }
 
-  function newContext(query?: RequestQuery, payload?: RequestPayload) {
+  function newContext(query?: RequestQuery, payload?: RequestPayload<unknown>) {
     return { query, payload };
   }
 
