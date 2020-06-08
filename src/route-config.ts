@@ -1,6 +1,7 @@
 export type RouteConfig = {
   method: string;
   path: string;
+  container?: Container;
   status?: StatusFn;
   template: Template;
 };
@@ -27,15 +28,23 @@ export type Route = {
 
 export type StatusFn = (ctx: RequestContext<unknown>) => number;
 
-export type TemplateLeafValue = string | boolean | number | null | object;
+export type ContainerLeafValue = string | boolean | number | null | object;
+export type ContainerFunction = (
+  context: RequestContext<unknown>,
+  templateGenerated: unknown,
+) => ContainerLeafValue;
+export type ContainerObjectValue = ContainerLeafValue | ContainerFunction;
+export type ContainerObject = {
+  [key in string]: ContainerObjectValue;
+};
+export type Container = ContainerLeafValue | ContainerObject | ContainerFunction;
 
+export type TemplateLeafValue = string | boolean | number | null | object;
 export type TemplateFunction = (
   context: RequestContext<unknown>,
 ) => TemplateLeafValue;
-
 export type TemplateObjectValue = TemplateLeafValue | TemplateFunction;
 export type TemplateObject = {
   [key in string]: TemplateObjectValue;
 };
-
 export type Template = TemplateLeafValue | TemplateObject | TemplateFunction;

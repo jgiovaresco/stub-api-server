@@ -120,4 +120,33 @@ describe('stub-api-server should', () => {
       });
     });
   });
+
+  describe('render template with container', () => {
+    it('using GET request', async () => {
+      const routes = [
+        {
+          method: 'GET',
+          path: '/hello/{gender}',
+          container: {
+            data: (ctx: RequestContext<Body>, data: unknown) => data,
+          },
+          template,
+        },
+      ];
+      await sut.start(routes);
+
+      const response = await sut.get('/hello/mr', { name: 'John' });
+      expect(response).toHaveBody({
+        data: {
+          simple: 'Hello World',
+          withRequestParam: 'mr',
+          func: 'Hello John',
+          sub: {
+            simple: 'Hello World',
+            func: 'Hello John',
+          },
+        },
+      });
+    });
+  });
 });
