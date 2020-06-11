@@ -1,3 +1,10 @@
+## [0.4.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.3.0...v0.4.0) (2020-06-11)
+
+
+### Features
+
+* implement dummy cache ([3136bdc](https://github.com/jgiovaresco/stub-api-server/commit/3136bdcc971d8ca5da819273acd187d05a72431a))
+
 ## [0.3.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.2.0...v0.3.0) (2020-06-11)
 
 
