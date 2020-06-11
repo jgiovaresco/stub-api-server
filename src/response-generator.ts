@@ -1,11 +1,4 @@
-import { isNil } from 'lodash';
-
-import {
-  defaultStatus,
-  processContainer,
-  processStatus,
-  processTemplate,
-} from './processors';
+import { defaultStatus, processBody, processStatus } from './processors';
 import { ResponseGenerated, RouteConfig, RequestContext } from './route-config';
 
 export class ResponseGenerator {
@@ -16,17 +9,7 @@ export class ResponseGenerator {
   ): Promise<ResponseGenerated> {
     return {
       status: processStatus(this.config.status || defaultStatus, context),
-      body: await this.generateBody(context),
+      body: await processBody(this.config, context),
     };
-  }
-
-  private async generateBody(context: RequestContext<unknown>) {
-    const body = await processTemplate(this.config.template, context);
-
-    if (isNil(this.config.container)) {
-      return body;
-    }
-
-    return processContainer(this.config.container, context, body);
   }
 }

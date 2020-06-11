@@ -1,4 +1,6 @@
-export type RouteConfig = SimpleRouteConfig;
+import { isNil } from 'lodash';
+
+export type RouteConfig = CollectionRouteConfig | SimpleRouteConfig;
 
 export type SimpleRouteConfig = {
   method: string;
@@ -7,6 +9,17 @@ export type SimpleRouteConfig = {
   status?: StatusFn;
   template: Template;
 };
+
+export type CollectionRouteConfig = SimpleRouteConfig & {
+  collection: boolean;
+  collectionSize: number;
+};
+
+export function isCollection(
+  config: RouteConfig,
+): config is CollectionRouteConfig {
+  return !isNil((config as CollectionRouteConfig).collection);
+}
 
 export type RequestParams = Record<string, string>;
 export type RequestQuery = { [key: string]: string | string[] };

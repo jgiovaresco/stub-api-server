@@ -1,3 +1,2 @@
-export * from './container-processor';
+export * from './response-body-processor';
 export * from './status-processor';
-export * from './template-processor';

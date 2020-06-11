@@ -1,11 +1,18 @@
 import { agent } from 'supertest';
 
-import { RequestQuery, RouteConfig, StubApiServer } from '../../src';
+import {
+  CollectionRouteConfig,
+  RequestQuery,
+  RouteConfig,
+  StubApiServer
+} from '../../src';
+
+type Config = RouteConfig | CollectionRouteConfig;
 
 export class SUT {
   constructor(private readonly server = new StubApiServer()) {}
 
-  public async start(routes: RouteConfig[] = []) {
+  public async start(routes: Config[] = []) {
     return this.server.useRoutes(routes).start();
   }
 
