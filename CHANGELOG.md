@@ -1,3 +1,22 @@
+## [0.2.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.1.1...v0.2.0) (2020-06-11)
+
+
+### Features
+
+* add container to the route config ([e02d63f](https://github.com/jgiovaresco/stub-api-server/commit/e02d63fea6ec7c0eb8a28b47fe35891fa8cc6790))
+* add request params to the RequestContext ([5f3cf27](https://github.com/jgiovaresco/stub-api-server/commit/5f3cf27c097084142e211e57aa8ebc5a4b8cc5d5))
+* allow to define many routes in the same file ([adc56dd](https://github.com/jgiovaresco/stub-api-server/commit/adc56ddb175f5bd1861fc577756fe4fb18dac1e2))
+* allow to generate collection responses ([aab947c](https://github.com/jgiovaresco/stub-api-server/commit/aab947cd194a128378d292ba0261857703ab6872))
+* allow to override status in route config ([781f4d3](https://github.com/jgiovaresco/stub-api-server/commit/781f4d361566e917e84b8adf82a0034ed7a41572))
+* change template function signature to receive a RequestContext ([2b0a6f0](https://github.com/jgiovaresco/stub-api-server/commit/2b0a6f07ba360904583c87e9d3a1cae24d39f5f0))
+* display a message showing the listening url ([d254814](https://github.com/jgiovaresco/stub-api-server/commit/d254814e49459db180d2e1cf275ad04b80840e86))
+* use hapi library instead koa ([4b681a5](https://github.com/jgiovaresco/stub-api-server/commit/4b681a530d9e5f9c69ae400cdaaa57fd85eeb279))
+
+
+### Bug Fixes
+
+* getting 500 status when handling POST requests ([e5a0f91](https://github.com/jgiovaresco/stub-api-server/commit/e5a0f916306b9dc0e09e37183788ab9512b8d3c2))
+
 ### [0.1.1](https://github.com/jgiovaresco/stub-api-server/compare/v0.1.0...v0.1.1) (2020-06-03)
 
 
