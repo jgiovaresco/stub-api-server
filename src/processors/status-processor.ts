@@ -1,14 +1,16 @@
-import { RequestContext, StatusFn } from '../route-config';
+import { isNil } from 'lodash';
+
+import { RequestContext, RouteConfig } from '../route-config';
 
 const DEFAULT_STATUS = 200;
 
-export function defaultStatus() {
-  return DEFAULT_STATUS;
-}
-
 export function processStatus(
-  statusFn: StatusFn,
+  config: RouteConfig,
   context: RequestContext<unknown>,
-) {
-  return statusFn(context);
+): number {
+  if (isNil(config.status)) {
+    return DEFAULT_STATUS;
+  }
+
+  return config.status(context);
 }

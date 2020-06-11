@@ -1,4 +1,4 @@
-import { defaultStatus, processBody, processStatus } from './processors';
+import { processBody, processStatus } from './processors';
 import { ResponseGenerated, RouteConfig, RequestContext } from './route-config';
 
 export class ResponseGenerator {
@@ -8,7 +8,7 @@ export class ResponseGenerator {
     context: RequestContext<unknown>,
   ): Promise<ResponseGenerated> {
     return {
-      status: processStatus(this.config.status || defaultStatus, context),
+      status: processStatus(this.config, context),
       body: await processBody(this.config, context),
     };
   }
