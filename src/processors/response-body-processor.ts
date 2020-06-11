@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { isNil, times } from 'lodash';
+import { isNil } from 'lodash';
 
-import {
-  CollectionRouteConfig,
-  isCollection,
-  RequestContext,
-  RouteConfig,
-} from '../route-config';
+import { RequestContext, RouteConfig } from '../route-config';
 import { processTemplate } from './template-processor';
+import { isCollection, processCollection } from './collection-processor';
 import { processContainer } from './container-processor';
 
 export async function processBody(
@@ -18,22 +14,14 @@ export async function processBody(
   return containerize(config, context, body);
 }
 
-async function buildBody(config: RouteConfig, context: RequestContext<unknown>) {
+async function buildBody(
+  config: RouteConfig,
+  context: RequestContext<unknown>,
+) {
   if (isCollection(config)) {
     return processCollection(config, context);
   }
   return processTemplate(config.template, context);
-}
-
-async function processCollection(
-  config: CollectionRouteConfig,
-  context: RequestContext<unknown>,
-) {
-  const size = config.collectionSize;
-
-  return Promise.all(
-    times(size, () => processTemplate(config.template, context)),
-  );
 }
 
 async function containerize(

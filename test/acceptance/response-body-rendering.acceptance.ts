@@ -151,7 +151,7 @@ describe('stub-api-server should', () => {
   });
 
   describe('render collection template', () => {
-    it('using GET request', async () => {
+    it('using fix number', async () => {
       const routes = [
         {
           method: 'GET',
@@ -166,6 +166,27 @@ describe('stub-api-server should', () => {
       await sut.start(routes);
 
       const response = await sut.get('/hello', { name: 'John' });
+      expect(response).toHaveBody([
+        { func: 'Hello John' },
+        { func: 'Hello John' },
+      ]);
+    });
+
+    it('using a function to generate the collection size', async () => {
+      const routes = [
+        {
+          method: 'GET',
+          path: '/hello',
+          collection: true,
+          collectionSize: (ctx: RequestContext<Body>) => ctx.query?.size,
+          template: {
+            func: (ctx: RequestContext<Body>) => `Hello ${ctx.query?.name}`,
+          },
+        },
+      ];
+      await sut.start(routes);
+
+      const response = await sut.get('/hello', { name: 'John', size: '2' });
       expect(response).toHaveBody([
         { func: 'Hello John' },
         { func: 'Hello John' },

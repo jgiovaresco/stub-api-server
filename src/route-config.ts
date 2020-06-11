@@ -1,5 +1,3 @@
-import { isNil } from 'lodash';
-
 export type RouteConfig = CollectionRouteConfig | SimpleRouteConfig;
 
 export type SimpleRouteConfig = {
@@ -12,14 +10,8 @@ export type SimpleRouteConfig = {
 
 export type CollectionRouteConfig = SimpleRouteConfig & {
   collection: boolean;
-  collectionSize: number;
+  collectionSize: number | CollectionSizeFn<unknown>;
 };
-
-export function isCollection(
-  config: RouteConfig,
-): config is CollectionRouteConfig {
-  return !isNil((config as CollectionRouteConfig).collection);
-}
 
 export type RequestParams = Record<string, string>;
 export type RequestQuery = { [key: string]: string | string[] };
@@ -42,6 +34,7 @@ export type Route = {
 };
 
 export type StatusFn = (ctx: RequestContext<unknown>) => number;
+export type CollectionSizeFn<T> = (ctx: RequestContext<T>) => number;
 
 export type ContainerLeafValue = string | boolean | number | null | object;
 export type ContainerFunction = (
