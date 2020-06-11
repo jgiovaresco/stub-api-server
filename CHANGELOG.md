@@ -1,3 +1,10 @@
+## [0.3.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.2.0...v0.3.0) (2020-06-11)
+
+
+### Features
+
+* allow to use a function to generate the collection size ([03fe80c](https://github.com/jgiovaresco/stub-api-server/commit/03fe80cdd87446987f9cb47871d8e6fb60cf0d5c))
+
 ## [0.2.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.1.1...v0.2.0) (2020-06-11)
 
 
