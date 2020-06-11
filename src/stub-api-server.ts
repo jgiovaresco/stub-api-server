@@ -58,6 +58,7 @@ export class StubApiServer {
           params: request.params,
           query: request.query,
           payload: request.payload,
+          url: request.url.toString()
         });
         return h.response(res.body as object).code(res.status);
       },

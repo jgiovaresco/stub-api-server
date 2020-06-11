@@ -1,3 +1,5 @@
+import Chance from 'chance';
+
 import { RequestContext } from '../../src';
 import { SUT } from './sut';
 
@@ -192,5 +194,24 @@ describe('stub-api-server should', () => {
         { func: 'Hello John' },
       ]);
     });
+  });
+
+  it('render cached response', async () => {
+    const faker = new Chance();
+    const routes = [
+      {
+        method: 'GET',
+        path: '/hello',
+        cache: true,
+        template: {
+          func: () => faker.natural(),
+        },
+      },
+    ];
+    await sut.start(routes);
+
+    const response1 = await sut.get('/hello');
+    const response2 = await sut.get('/hello');
+    expect(response1.body).toEqual(response2.body);
   });
 });

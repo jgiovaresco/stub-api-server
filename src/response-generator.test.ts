@@ -25,7 +25,7 @@ describe('RouteGenerator should', () => {
   }
 
   function newContext(query?: RequestQuery, payload?: RequestPayload<unknown>) {
-    return { query, payload };
+    return { query, payload, url: 'http://localhost:8000' };
   }
 
   it('generate a 200 response by default', async () => {
@@ -46,7 +46,7 @@ describe('RouteGenerator should', () => {
 
   describe('process object templates', () => {
     it('using simple values', async () => {
-      const context = {};
+      const context = newContext();
       const template = { message: 'Hello World' };
       const templateDeep = { root: { msg: 'Hello' } };
 
@@ -62,7 +62,7 @@ describe('RouteGenerator should', () => {
       const template = {
         message: (ctx: RequestContext<unknown>) => `Hello ${ctx.query?.name}`,
       };
-      const context = { query: { name: 'John' } };
+      const context = newContext({ name: 'John' });
 
       expect(await generatedBody(template, context)).toEqual({
         message: 'Hello John',
@@ -74,7 +74,7 @@ describe('RouteGenerator should', () => {
       const template = {
         message: (ctx: RequestContext<Body>) => `Hello ${ctx.payload?.name}`,
       };
-      const context = { payload: { name: 'John' } };
+      const context = newContext({}, { name: 'John' });
 
       expect(await generatedBody(template, context)).toEqual({
         message: 'Hello John',
@@ -86,7 +86,7 @@ describe('RouteGenerator should', () => {
     it('using query provided', async () => {
       const template = (ctx: RequestContext<unknown>) =>
         `Hello ${ctx.query?.name}`;
-      const context = { query: { name: 'John' } };
+      const context = newContext({ name: 'John' });
 
       expect(await generatedBody(template, context)).toEqual('Hello John');
     });
@@ -95,14 +95,14 @@ describe('RouteGenerator should', () => {
       type Body = { name: string };
       const template = (ctx: RequestContext<Body>) =>
         `Hello ${ctx.payload?.name}`;
-      const context = { payload: { name: 'John' } };
+      const context = newContext({}, { name: 'John' });
 
       expect(await generatedBody(template, context)).toEqual('Hello John');
     });
 
     it('using async function', async () => {
       const template = () => Bluebird.delay(10).then(() => 'Hello World');
-      const context = {};
+      const context = newContext();
 
       expect(await generatedBody(template, context)).toEqual('Hello World');
     });

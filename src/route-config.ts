@@ -3,6 +3,7 @@ export type RouteConfig = CollectionRouteConfig | SimpleRouteConfig;
 export type SimpleRouteConfig = {
   method: string;
   path: string;
+  cache?: boolean;
   container?: Container;
   status?: StatusFn;
   template: Template;
@@ -21,6 +22,7 @@ export type RequestContext<T> = {
   params?: RequestParams;
   query?: RequestQuery;
   payload?: RequestPayload<T>;
+  url: string;
 };
 export type ResponseGenerated = {
   status: number;

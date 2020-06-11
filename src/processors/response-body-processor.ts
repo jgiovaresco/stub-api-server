@@ -6,12 +6,25 @@ import { processTemplate } from './template-processor';
 import { isCollection, processCollection } from './collection-processor';
 import { processContainer } from './container-processor';
 
+const cache: Record<string, unknown> = {};
+
 export async function processBody(
   config: RouteConfig,
   context: RequestContext<unknown>,
 ) {
-  const body = await buildBody(config, context);
-  return containerize(config, context, body);
+  const cacheKey = config.method + context.url;
+
+  if (config.cache && !isNil(cache[cacheKey])) {
+    return cache[cacheKey];
+  }
+
+  const body = await containerize(
+    config,
+    context,
+    await buildBody(config, context),
+  );
+  cache[cacheKey] = body;
+  return body;
 }
 
 async function buildBody(
