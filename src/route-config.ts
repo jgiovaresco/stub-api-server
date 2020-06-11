@@ -1,4 +1,6 @@
-export type RouteConfig = {
+export type RouteConfig = SimpleRouteConfig;
+
+export type SimpleRouteConfig = {
   method: string;
   path: string;
   container?: Container;
@@ -37,7 +39,10 @@ export type ContainerObjectValue = ContainerLeafValue | ContainerFunction;
 export type ContainerObject = {
   [key in string]: ContainerObjectValue;
 };
-export type Container = ContainerLeafValue | ContainerObject | ContainerFunction;
+export type Container =
+  | ContainerLeafValue
+  | ContainerObject
+  | ContainerFunction;
 
 export type TemplateLeafValue = string | boolean | number | null | object;
 export type TemplateFunction = (
