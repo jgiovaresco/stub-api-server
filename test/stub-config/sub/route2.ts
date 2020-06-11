@@ -1,9 +1,14 @@
-import { RouteConfig } from '../../../src/route-config';
+import { RouteConfig } from '../../../src';
 
-const configRoute2: RouteConfig = {
+const configRoute2a: RouteConfig = {
   method: 'GET',
-  path: '/a/route2',
-  template: { message: 'route2' },
+  path: '/a/route2/a',
+  template: { message: 'route2a' },
+};
+const configRoute2b: RouteConfig = {
+  method: 'GET',
+  path: '/a/route2/b',
+  template: { message: 'route2b' },
 };
 
-export default configRoute2;
+export default [configRoute2a, configRoute2b];

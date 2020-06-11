@@ -56,7 +56,10 @@ describe('stub-api-server should', () => {
     let response = await stubServer.get('/route1');
     expect(response.status).toBe(200);
 
-    response = await stubServer.get('/a/route2');
+    response = await stubServer.get('/a/route2/a');
+    expect(response.status).toBe(200);
+
+    response = await stubServer.get('/a/route2/b');
     expect(response.status).toBe(200);
   });
 });

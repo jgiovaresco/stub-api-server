@@ -6,16 +6,22 @@ import { has } from 'lodash';
 import { ResponseGenerator } from './response-generator';
 import { Route, RouteConfig } from './route-config';
 
-export function buildFromRouteConfig(routes: RouteConfig[]) {
+export function buildFromRouteConfig(routes: RouteConfig[]): Route[] {
   return routes.map(route => routerFromConfig(route));
 }
 
-export async function buildFromDirectory(path: string) {
+export async function buildFromDirectory(path: string): Promise<Route[]> {
   const files = await globby(path);
 
   return Bluebird.map(files, f => import(f))
     .filter(def => has(def, 'default'))
-    .map(def => routerFromConfig(def.default));
+    .map(def => {
+      if (Array.isArray(def.default)) {
+        return buildFromRouteConfig(def.default);
+      }
+      return routerFromConfig(def.default);
+    })
+    .reduce((prev: Route[], cur) => prev.concat(cur), []);
 }
 
 function routerFromConfig(config: RouteConfig): Route {

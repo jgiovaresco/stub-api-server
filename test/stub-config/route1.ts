@@ -1,4 +1,4 @@
-import { RouteConfig } from '../../src/route-config';
+import { RouteConfig } from '../../src';
 
 const configRoute1: RouteConfig = {
   method: 'GET',
