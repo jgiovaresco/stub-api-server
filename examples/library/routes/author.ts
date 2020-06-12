@@ -1,4 +1,4 @@
-// routes/books.ts
+// routes/author.ts
 import Chance from 'chance';
 
 import { RequestContext, SimpleRouteConfig } from '../../../src';
@@ -12,6 +12,7 @@ type AuthorBody = {
 const newAuthor: SimpleRouteConfig = {
   method: 'POST',
   path: '/authors',
+  status: () => 201,
   template: {
     id: faker.natural(),
     firstname: (ctx: RequestContext<AuthorBody>) => ctx.payload?.firstName,
@@ -19,4 +20,4 @@ const newAuthor: SimpleRouteConfig = {
   },
 };
 
-export default newAuthor;
+export const authorRoutes = [newAuthor];
