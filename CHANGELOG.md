@@ -1,3 +1,10 @@
+## [0.5.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.4.0...v0.5.0) (2020-06-12)
+
+
+### Features
+
+* remove the ability to load routes from directory ([c7f6b59](https://github.com/jgiovaresco/stub-api-server/commit/c7f6b5938c924af5d3a2ddc2f0f78ef53dfa3b72))
+
 ## [0.4.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.3.0...v0.4.0) (2020-06-11)
 
 
