@@ -24,10 +24,7 @@ export type RequestContext<T> = {
   payload?: RequestPayload<T>;
   url: string;
 };
-export type ResponseGenerated = {
-  status: number;
-  body: unknown;
-};
+
 
 export type StatusFn = (ctx: RequestContext<unknown>) => number;
 export type CollectionSizeFn<T> = (ctx: RequestContext<T>) => number;

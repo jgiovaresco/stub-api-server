@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { ResponseGenerator } from './response-generator';
-import { RequestContext, ResponseGenerated, RouteConfig } from './route-config';
+import { RequestContext, RouteConfig } from './route-config';
+import { processBody, processStatus } from './processors';
 
 export type Route = {
   method: string;
   path: string;
   handler: (context: RequestContext<unknown>) => Promise<ResponseGenerated>;
+};
+export type ResponseGenerated = {
+  status: number;
+  body: unknown;
 };
 
 export function buildFromRouteConfig(routes: RouteConfig[]): Route[] {
@@ -14,13 +18,19 @@ export function buildFromRouteConfig(routes: RouteConfig[]): Route[] {
 }
 
 function routerFromConfig(config: RouteConfig): Route {
-  const generator = new ResponseGenerator(config);
-
   return {
     method: config.method,
     path: config.path,
-    handler: context => {
-      return generator.generate(context);
-    },
+    handler: context => generate(config, context),
+  };
+}
+
+async function generate(
+  config: RouteConfig,
+  context: RequestContext<unknown>,
+): Promise<ResponseGenerated> {
+  return {
+    status: processStatus(config, context),
+    body: await processBody(config, context),
   };
 }
