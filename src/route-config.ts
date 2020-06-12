@@ -15,7 +15,7 @@ export type CollectionRouteConfig = SimpleRouteConfig & {
 };
 
 export type RequestParams = Record<string, string>;
-export type RequestQuery = { [key: string]: string | string[] };
+export type RequestQuery = Record<string, string | string[]>;
 export type RequestPayload<T> = T;
 
 export type RequestContext<T> = {
@@ -24,7 +24,6 @@ export type RequestContext<T> = {
   payload?: RequestPayload<T>;
   url: string;
 };
-
 
 export type StatusFn = (ctx: RequestContext<unknown>) => number;
 export type CollectionSizeFn<T> = (ctx: RequestContext<T>) => number;
