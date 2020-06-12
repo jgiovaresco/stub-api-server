@@ -1,9 +1,8 @@
 import { Server } from '@hapi/hapi';
 import { notImplemented } from '@hapi/boom';
-import Bluebird from 'bluebird';
 
 import { Route, RouteConfig } from './route-config';
-import { buildFromDirectory, buildFromRouteConfig } from './route-builder';
+import { buildFromRouteConfig } from './route-builder';
 
 export type StubApiServerOptions = {
   port?: number;
@@ -30,13 +29,6 @@ export class StubApiServer {
     return this;
   }
 
-  public async useRoutesFromDir(path: string) {
-    await Bluebird.resolve()
-      .then(() => buildFromDirectory(path))
-      .map(r => this.addRoute(r));
-    return this;
-  }
-
   public async start() {
     await this.app.start();
   }
@@ -58,7 +50,7 @@ export class StubApiServer {
           params: request.params,
           query: request.query,
           payload: request.payload,
-          url: request.url.toString()
+          url: request.url.toString(),
         });
         return h.response(res.body as object).code(res.status);
       },
