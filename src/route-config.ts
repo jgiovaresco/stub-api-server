@@ -29,12 +29,6 @@ export type ResponseGenerated = {
   body: unknown;
 };
 
-export type Route = {
-  method: string;
-  path: string;
-  handler: (context: RequestContext<unknown>) => Promise<ResponseGenerated>;
-};
-
 export type StatusFn = (ctx: RequestContext<unknown>) => number;
 export type CollectionSizeFn<T> = (ctx: RequestContext<T>) => number;
 
