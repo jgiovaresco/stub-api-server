@@ -1,10 +1,7 @@
-import path from 'path';
-import { StubApiServer } from '../../src';
-
-const server = new StubApiServer({ port: 8000 });
+import { newServer } from './server';
 
 (async () => {
-  await server.useRoutesFromDir(path.resolve('./routes'));
+  const server = newServer(8000);
   await server.start();
   console.info(`Listening on ${server.listeningUrl()}`);
 })();

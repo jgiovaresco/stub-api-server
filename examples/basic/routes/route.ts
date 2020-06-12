@@ -1,10 +1,8 @@
 // routes/route.ts
 import { RouteConfig } from '../../../src';
 
-const route: RouteConfig = {
+export const helloRoute: RouteConfig = {
   method: 'GET',
   path: '/hello',
   template: { message: 'Hello World' },
 };
-
-export default route;
