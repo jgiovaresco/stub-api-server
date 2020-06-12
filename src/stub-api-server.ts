@@ -1,8 +1,8 @@
 import { Server } from '@hapi/hapi';
 import { notImplemented } from '@hapi/boom';
 
-import { Route, RouteConfig } from './route-config';
-import { buildFromRouteConfig } from './route-builder';
+import { RouteConfig } from './route-config';
+import { buildFromRouteConfig, Route } from './route-builder';
 
 export type StubApiServerOptions = {
   port?: number;
