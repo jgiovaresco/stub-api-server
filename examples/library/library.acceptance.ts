@@ -1,11 +1,16 @@
 import { agent } from 'supertest';
 
 import { newServer } from './server';
+import { StubApiServer } from '../../src';
 
 describe('Library example', () => {
-  const server = newServer();
+  let server: StubApiServer;
 
-  beforeEach(() => server.start());
+    beforeEach(async () => {
+      server = await newServer();
+      await server.start();
+    });
+
   afterEach(() => server.stop());
 
   it('should work', async () => {

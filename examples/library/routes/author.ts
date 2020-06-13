@@ -9,7 +9,7 @@ type AuthorBody = {
   firstName: string;
   lastName: string;
 };
-const newAuthor: SimpleRouteConfig = {
+export const newAuthor: SimpleRouteConfig = {
   method: 'POST',
   path: '/authors',
   status: () => 201,
@@ -19,5 +19,3 @@ const newAuthor: SimpleRouteConfig = {
     lastname: (ctx: RequestContext<AuthorBody>) => ctx.payload?.lastName,
   },
 };
-
-export const authorRoutes = [newAuthor];
