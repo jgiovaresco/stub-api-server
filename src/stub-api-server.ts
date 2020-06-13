@@ -2,7 +2,7 @@ import { Server } from '@hapi/hapi';
 import { notImplemented } from '@hapi/boom';
 
 import { RouteConfig } from './route-config';
-import { buildFromRouteConfig, Route } from './route-builder';
+import { buildFromDirectory, buildFromRouteConfig, Route } from './route-builder';
 
 export type StubApiServerOptions = {
   port?: number;
@@ -26,6 +26,12 @@ export class StubApiServer {
 
   public useRoutes(routes: RouteConfig[]) {
     buildFromRouteConfig(routes).map(r => this.addRoute(r));
+    return this;
+  }
+
+  public async useRoutesFromDir(path: string) {
+    (await buildFromDirectory(path))
+      .map(r => this.addRoute(r));
     return this;
   }
 

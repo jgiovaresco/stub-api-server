@@ -20,7 +20,7 @@ const bookTemplate = {
   })),
 };
 
-const getBooks: CollectionRouteConfig = {
+export const getBooks: CollectionRouteConfig = {
   method: 'GET',
   collection: true,
   collectionSize: 3,
@@ -36,7 +36,7 @@ const getBooks: CollectionRouteConfig = {
   },
 };
 
-const getBook: SimpleRouteConfig = {
+export const getBook: SimpleRouteConfig = {
   method: 'GET',
   path: '/books/{id}',
   template: {
@@ -50,4 +50,3 @@ const getBook: SimpleRouteConfig = {
   },
 };
 
-export const booksRoutes = [getBook, getBooks];
