@@ -1,3 +1,10 @@
+## [0.6.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.5.0...v0.6.0) (2020-06-14)
+
+
+### Features
+
+* add back the ability to load routes from directory ([afc334a](https://github.com/jgiovaresco/stub-api-server/commit/afc334a3b66d9ef003a13f0601a11e985ec15335))
+
 ## [0.5.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.4.0...v0.5.0) (2020-06-12)
 
 
