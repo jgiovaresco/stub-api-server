@@ -6,10 +6,10 @@ import { StubApiServer } from '../../src';
 describe('Library example', () => {
   let server: StubApiServer;
 
-    beforeEach(async () => {
-      server = await newServer();
-      await server.start();
-    });
+  beforeEach(async () => {
+    server = await newServer();
+    await server.start();
+  });
 
   afterEach(() => server.stop());
 
