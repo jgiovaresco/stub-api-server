@@ -1,3 +1,10 @@
+### [0.6.1](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.0...v0.6.1) (2020-06-15)
+
+
+### Bug Fixes
+
+* only read js & ts files when loading routes from directory ([873366d](https://github.com/jgiovaresco/stub-api-server/commit/873366d83114f535ed3237db9f43dd6e7283c3f1))
+
 ## [0.6.0](https://github.com/jgiovaresco/stub-api-server/compare/v0.5.0...v0.6.0) (2020-06-14)
 
 
