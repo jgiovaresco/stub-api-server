@@ -22,11 +22,13 @@ export function buildFromRouteConfig(routes: RouteConfig[]): Route[] {
 export async function buildFromDirectory(path: string): Promise<Route[]> {
   const files = await globby(path);
 
-  return (await Promise.all(files.map(f => import(f))))
-    // Get all values exported via `export const XXX =`
-    .flatMap(exports => Object.values(exports))
-    .filter(isValidRouteConfig)
-    .map(route => routerFromConfig(route))
+  return (
+    (await Promise.all(files.map(f => import(f))))
+      // Get all values exported via `export const XXX =`
+      .flatMap(exports => Object.values(exports))
+      .filter(isValidRouteConfig)
+      .map(route => routerFromConfig(route))
+  );
 }
 
 function routerFromConfig(config: RouteConfig): Route {
@@ -48,9 +50,13 @@ async function generate(
 }
 
 function isValidRouteConfig(input: any): input is RouteConfig {
-  if(isString(input.method) && isString(input.path) && !isNil(input.template)) {
+  if (
+    isString(input.method) &&
+    isString(input.path) &&
+    !isNil(input.template)
+  ) {
     return true;
   }
 
-  return  false;
+  return false;
 }

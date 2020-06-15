@@ -13,10 +13,12 @@ export const noTemplate = {
   path: '/boom',
 };
 
-export const nothingRelatedToARouteConfig = [{
-  name: 'John',
-}];
+export const nothingRelatedToARouteConfig = [
+  {
+    name: 'John',
+  },
+];
 
 export default {
   name: 'Jane',
-}
+};

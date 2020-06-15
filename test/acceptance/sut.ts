@@ -4,7 +4,7 @@ import {
   CollectionRouteConfig,
   RequestQuery,
   RouteConfig,
-  StubApiServer
+  StubApiServer,
 } from '../../src';
 
 type Config = RouteConfig | CollectionRouteConfig;
