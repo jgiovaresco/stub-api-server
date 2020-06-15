@@ -20,7 +20,9 @@ export function buildFromRouteConfig(routes: RouteConfig[]): Route[] {
 }
 
 export async function buildFromDirectory(path: string): Promise<Route[]> {
-  const files = await globby(path);
+  const files = await globby(path, {
+    expandDirectories: { files: ['*.ts', '*.js'] },
+  });
 
   return (
     (await Promise.all(files.map(f => import(f))))
