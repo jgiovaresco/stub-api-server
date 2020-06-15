@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['dist/**'],
   env: {
     es6: true,
     'jest/globals': true,
