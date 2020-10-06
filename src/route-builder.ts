@@ -54,6 +54,7 @@ async function generate(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isValidRouteConfig(input: any): input is RouteConfig {
   return (
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     isString(input.method) && isString(input.path) && !isNil(input.template)
   );
 }

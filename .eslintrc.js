@@ -24,7 +24,10 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'import', 'jest', 'prettier'],
   rules: {
+    '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
   },
   settings: {
     'import/ignore': ['node_modules'],

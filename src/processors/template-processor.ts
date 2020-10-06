@@ -36,6 +36,7 @@ export function processTemplate(
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isPromise(value: any): value is Promise<unknown> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return !!value && 'function' === typeof value.then;
 }
 
