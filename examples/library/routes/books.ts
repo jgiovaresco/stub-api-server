@@ -11,7 +11,7 @@ import {
 const faker = new Chance('1234');
 
 const bookTemplate = {
-  id: '' + faker.natural(),
+  id: `${faker.natural()}`,
   name: faker.word(),
   authors: times(2, () => ({
     id: faker.natural(),
