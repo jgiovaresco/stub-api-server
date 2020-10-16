@@ -1,3 +1,5 @@
+### [0.6.7](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.6...v0.6.7) (2020-10-16)
+
 ### [0.6.6](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.5...v0.6.6) (2020-10-06)
 
 ### [0.6.5](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.4...v0.6.5) (2020-10-06)
