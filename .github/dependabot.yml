@@ -8,3 +8,6 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    commit-message:
+      prefix: "ci"
+      prefix-development: "ci"
