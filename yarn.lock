@@ -544,9 +544,9 @@
   integrity sha512-WSrlgpvEqgPWkI18kkGELEZfXr0bYLtr16iIN4Krh9sRnzBZN6nnWxHFxtsnP684wueEySBbXPDg/WfA9xJdBQ==
 
 "@hapi/hapi@^20.0.1":
-  version "20.0.3"
-  resolved "https://registry.yarnpkg.com/@hapi/hapi/-/hapi-20.0.3.tgz#e72cad460394e6d2c15f9c57abb5d3332dea27e3"
-  integrity sha512-aqJVHVjoY3phiZsgsGjDRG15CoUNIs1azScqLZDOCZUSKYGTbzPi+K0QP+RUjUJ0m8L9dRuTZ27c8HKxG3wEhA==
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@hapi/hapi/-/hapi-20.1.1.tgz#563a1421dd2bbcb6b2e029b68c14fa0f1840b17d"
+  integrity sha512-FvszZ51i/mlTUyhqL/Be2bjmJcEiVzEcKCM9Z3fiyEYKfnilidhNjso/VgqmVTyEqv2uzRBQ6G4zjeD//j13jg==
   dependencies:
     "@hapi/accept" "^5.0.1"
     "@hapi/ammo" "^5.0.1"
