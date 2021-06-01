@@ -1,0 +1,49 @@
+{
+  "extends": ["config:base", "group:nodeJs", "schedule:monthly"],
+  "prConcurrentLimit": 3,
+  "commitBodyTable": true,
+  "dependencyDashboard": true,
+  "commitMessageTopic": "{{depName}}",
+  "packageRules": [
+    {
+      "groupName": "dev-tools",
+      "packageNames": [
+        "conventional-changelog-conventionalcommits",
+        "husky",
+        "is-ci",
+        "lint-staged"
+      ]
+    },
+    {
+      "groupName": "js-test-libs",
+      "packagePatterns": [
+        "@types/chance",
+        "@types/jest",
+        "chance",
+        "^jest*",
+        "ts-jest"
+      ]
+    },
+    {
+      "groupName": "linters",
+      "packagePatterns": [
+        "^@commitlint/*",
+        "^eslint*",
+        "^prettier",
+        "^prettier-*",
+        "^sort-package-json",
+        "^@typescript-eslint/*"
+      ]
+    },
+    {
+      "groupName": "supertest",
+      "packageNames": ["@types/supertest", "supertest"]
+    },
+    {
+      "groupName": "devDependencies (non-major)",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    }
+  ]
+}
