@@ -1,7 +1,7 @@
 import 'jest-extended';
 import 'jest-chain';
 import request from 'superagent';
-import diff from 'jest-diff';
+import { diff } from 'jest-diff';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -45,9 +45,10 @@ expect.extend({
           `Expected: not ${this.utils.printExpected(expected)}\n` +
           `Received: ${this.utils.printReceived(received)}`
       : () => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           const diffString = diff(expected, received, {
             expand: this.expand,
-          });
+          }) as string;
           return (
             this.utils.matcherHint('toBe', undefined, undefined, options) +
             '\n\n' +
