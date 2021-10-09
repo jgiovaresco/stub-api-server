@@ -1,5 +1,11 @@
 module.exports = {
-  ignorePatterns: ['dist/**'],
+  ignorePatterns: [
+    'dist/**',
+    '.eslintrc.js',
+    '.prettierrc.js',
+    'jest.config.js',
+    'release.config.js',
+  ],
   env: {
     es6: true,
     'jest/globals': true,
@@ -13,7 +19,6 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:jest/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
