@@ -2294,7 +2294,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/supertest@npm:^2.0.11":
+"@types/supertest@npm:2.0.11":
   version: 2.0.11
   resolution: "@types/supertest@npm:2.0.11"
   dependencies:
@@ -10123,7 +10123,7 @@ resolve@^1.3.2:
     "@types/hapi__hapi": 20.0.9
     "@types/jest": 27.0.2
     "@types/lodash": 4.14.175
-    "@types/supertest": ^2.0.11
+    "@types/supertest": 2.0.11
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     bluebird: ^3.7.2
@@ -10144,7 +10144,7 @@ resolve@^1.3.2:
     lodash: ^4.17.21
     prettier: 2.4.1
     semantic-release: 18.0.0
-    supertest: ^6.1.6
+    supertest: 6.1.6
     ts-jest: 27.0.5
     ts-node: 10.2.1
     typescript: 4.4.3
@@ -10170,7 +10170,7 @@ resolve@^1.3.2:
   languageName: node
   linkType: hard
 
-"supertest@npm:^6.1.6":
+"supertest@npm:6.1.6":
   version: 6.1.6
   resolution: "supertest@npm:6.1.6"
   dependencies:
