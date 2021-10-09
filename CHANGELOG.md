@@ -1,3 +1,11 @@
+### [0.6.11](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.10...v0.6.11) (2021-10-09)
+
+
+### Bug Fixes
+
+* **deps:** update globby ([4f58f5a](https://github.com/jgiovaresco/stub-api-server/commit/4f58f5ada4efc8fe949a61a263ccc5471b4dfdad))
+* **deps:** update hapi ([48757e6](https://github.com/jgiovaresco/stub-api-server/commit/48757e6c7b2e3e4002e9b6b95af27b063c546230))
+
 ### [0.6.10](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.9...v0.6.10) (2021-06-01)
 
 ### [0.6.9](https://github.com/jgiovaresco/stub-api-server/compare/v0.6.8...v0.6.9) (2020-11-23)
