@@ -1799,7 +1799,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/changelog@npm:^6.0.0":
+"@semantic-release/changelog@npm:6.0.0":
   version: 6.0.0
   resolution: "@semantic-release/changelog@npm:6.0.0"
   dependencies:
@@ -1813,7 +1813,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/commit-analyzer@npm:^9.0.0, @semantic-release/commit-analyzer@npm:^9.0.1":
+"@semantic-release/commit-analyzer@npm:9.0.1, @semantic-release/commit-analyzer@npm:^9.0.0":
   version: 9.0.1
   resolution: "@semantic-release/commit-analyzer@npm:9.0.1"
   dependencies:
@@ -1844,7 +1844,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/git@npm:^10.0.0":
+"@semantic-release/git@npm:10.0.0":
   version: 10.0.0
   resolution: "@semantic-release/git@npm:10.0.0"
   dependencies:
@@ -1862,7 +1862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/github@npm:^8.0.0, @semantic-release/github@npm:^8.0.1":
+"@semantic-release/github@npm:8.0.1, @semantic-release/github@npm:^8.0.0":
   version: 8.0.1
   resolution: "@semantic-release/github@npm:8.0.1"
   dependencies:
@@ -1888,7 +1888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/npm@npm:^8.0.0":
+"@semantic-release/npm@npm:8.0.0, @semantic-release/npm@npm:^8.0.0":
   version: 8.0.0
   resolution: "@semantic-release/npm@npm:8.0.0"
   dependencies:
@@ -1911,7 +1911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/release-notes-generator@npm:^10.0.0, @semantic-release/release-notes-generator@npm:^10.0.2":
+"@semantic-release/release-notes-generator@npm:10.0.2, @semantic-release/release-notes-generator@npm:^10.0.0":
   version: 10.0.2
   resolution: "@semantic-release/release-notes-generator@npm:10.0.2"
   dependencies:
@@ -2077,7 +2077,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bluebird@npm:^3.5.36":
+"@types/bluebird@npm:3.5.36":
   version: 3.5.36
   resolution: "@types/bluebird@npm:3.5.36"
   checksum: efe7484e1f6c3443c083f052efb7688b461a9f43899b1891c10b1faf92e4932d686265d10c3e02b8c8fe0c8c371774e6a55ff6eec5e79525390a1ddeee7eb41b
@@ -2114,7 +2114,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/hapi__hapi@npm:^20.0.9":
+"@types/hapi__hapi@npm:20.0.9":
   version: 20.0.9
   resolution: "@types/hapi__hapi@npm:20.0.9"
   dependencies:
@@ -2214,7 +2214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.175":
+"@types/lodash@npm:4.14.175":
   version: 4.14.175
   resolution: "@types/lodash@npm:4.14.175"
   checksum: 50721f33faa542f1b9f62f2ba769ed353c6036711e92bd89ce569f2ed247e38fb2a2899f6fd46466b1690fea7ae0239471e6a6093c54e8f2b0613e43e8eac19c
@@ -9458,7 +9458,7 @@ resolve@^1.3.2:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:18.0.0, semantic-release@npm:^18.0.0":
+"semantic-release@npm:18.0.0":
   version: 18.0.0
   resolution: "semantic-release@npm:18.0.0"
   dependencies:
@@ -10112,17 +10112,17 @@ resolve@^1.3.2:
     "@commitlint/cli": 13.2.1
     "@commitlint/config-conventional": 13.2.0
     "@hapi/hapi": ^20.2.1
-    "@semantic-release/changelog": ^6.0.0
-    "@semantic-release/commit-analyzer": ^9.0.1
-    "@semantic-release/git": ^10.0.0
-    "@semantic-release/github": ^8.0.1
-    "@semantic-release/npm": ^8.0.0
-    "@semantic-release/release-notes-generator": ^10.0.2
-    "@types/bluebird": ^3.5.36
+    "@semantic-release/changelog": 6.0.0
+    "@semantic-release/commit-analyzer": 9.0.1
+    "@semantic-release/git": 10.0.0
+    "@semantic-release/github": 8.0.1
+    "@semantic-release/npm": 8.0.0
+    "@semantic-release/release-notes-generator": 10.0.2
+    "@types/bluebird": 3.5.36
     "@types/chance": ^1.1.3
-    "@types/hapi__hapi": ^20.0.9
+    "@types/hapi__hapi": 20.0.9
     "@types/jest": ^27.0.2
-    "@types/lodash": ^4.14.175
+    "@types/lodash": 4.14.175
     "@types/supertest": ^2.0.11
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
@@ -10143,11 +10143,11 @@ resolve@^1.3.2:
     lint-staged: ^11.2.1
     lodash: ^4.17.21
     prettier: 2.4.1
-    semantic-release: ^18.0.0
+    semantic-release: 18.0.0
     supertest: ^6.1.6
     ts-jest: ^27.0.5
-    ts-node: ^10.2.1
-    typescript: ^4.4.3
+    ts-node: 10.2.1
+    typescript: 4.4.3
   languageName: unknown
   linkType: soft
 
@@ -10533,7 +10533,7 @@ resolve@^1.3.2:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.2.1":
+"ts-node@npm:10.2.1":
   version: 10.2.1
   resolution: "ts-node@npm:10.2.1"
   dependencies:
@@ -10752,7 +10752,7 @@ resolve@^1.3.2:
   languageName: node
   linkType: hard
 
-typescript@^4.4.3:
+"typescript@4.4.3, typescript@^4.4.3":
   version: 4.4.3
   resolution: "typescript@npm:4.4.3"
   bin:
@@ -10762,7 +10762,7 @@ typescript@^4.4.3:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.4.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.4.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.4.3#~builtin<compat/typescript>":
   version: 4.4.3
   resolution: "typescript@patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"
   bin:
