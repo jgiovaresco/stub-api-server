@@ -80,8 +80,8 @@
     "semantic-release": "^18.0.0",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.1",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.3"
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
   },
   "dependencies": {
     "@hapi/hapi": "^20.0.1",
