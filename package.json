@@ -18,7 +18,7 @@
     "lint:prettier:fix": "prettier --write {examples,src,test}/**/*",
     "prepublishOnly": "yarn build",
     "release": "semantic-release",
-    "test": "jest --color --forceExit",
+    "test": "jest --color --detectOpenHandles",
     "test:cov": "yarn test --coverage"
   },
   "commitlint": {
