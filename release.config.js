@@ -3,7 +3,6 @@ const commitOptions = {
   releaseRules: [
     // Import default rules
     ...require('@semantic-release/commit-analyzer/lib/default-release-rules'),
-    { type: 'chore', scope: 'deps', release: 'patch' },
   ],
   parserOpts: {
     noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
