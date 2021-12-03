@@ -22,14 +22,14 @@ describe('stub-api-server should', () => {
     await start(4444);
 
     const response = await agent(stub.listeningUrl()).get('/');
-    expect(response.status).toBeNumber();
+    expect(response.status).toBeInteger();
   });
 
   it('start an http server random port', async () => {
     await start();
 
     const response = await agent(stub.listeningUrl()).get('/');
-    expect(response.status).toBeNumber();
+    expect(response.status).toBeInteger();
   });
 
   it('load routes provided', async () => {
