@@ -69,7 +69,7 @@
     "jest": "27.4.3",
     "jest-chain": "1.1.5",
     "jest-extended": "1.2.0",
-    "lint-staged": "11.2.6",
+    "lint-staged": "12.1.2",
     "prettier": "2.5.0",
     "semantic-release": "18.0.1",
     "supertest": "6.1.6",
