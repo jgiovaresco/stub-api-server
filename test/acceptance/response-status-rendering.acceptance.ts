@@ -48,7 +48,7 @@ describe('stub-api-server should', () => {
       {
         method: 'POST',
         path: '/hi/{gender}',
-        status: <T extends Body>(ctx: RequestContext<unknown>) => {
+        status: (ctx: RequestContext<unknown>) => {
           const payload = ctx.payload as Body;
           if (ctx.query?.name) return 201;
           if (payload?.name) return 202;

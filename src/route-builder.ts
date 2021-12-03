@@ -27,6 +27,7 @@ export async function buildFromDirectory(path: string): Promise<Route[]> {
   return (
     (await Promise.all(files.map(f => import(f))))
       // Get all values exported via `export const XXX =`
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       .flatMap(exports => Object.values(exports))
       .filter(isValidRouteConfig)
       .map(route => routerFromConfig(route))
