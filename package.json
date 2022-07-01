@@ -83,5 +83,5 @@
     "globby": "^11.0.4",
     "lodash": "^4.17.21"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.2.1"
 }
