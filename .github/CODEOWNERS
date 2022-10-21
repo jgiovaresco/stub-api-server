@@ -1,1 +1,3 @@
 *             @jgiovaresco
+package.json  @jgiovaresco app/renovate-approve
+yarn.lock     @jgiovaresco app/renovate-approve
