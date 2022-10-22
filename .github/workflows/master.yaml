@@ -10,18 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.2
+        uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 1
 
-      - name: Use Node.js 15.x
-        uses: actions/setup-node@v2.5.1
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3.5.1
         with:
-          node-version: 15
+          node-version: 16
 
       - name: Cache node modules
         id: cache
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v3.0.11
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
@@ -45,7 +45,7 @@ jobs:
         run: |
           yarn test:cov
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3.1.1
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           file: ./coverage/clover.xml
