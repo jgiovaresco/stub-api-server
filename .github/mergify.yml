@@ -1,0 +1,11 @@
+pull_request_rules:
+  - name: Automatic merge ⬇️ renovate PR
+    conditions:
+      - "body~=/[Automerge: Enabled/]"
+      - "author=renovate[bot]"
+      - "check-success=test"
+      - "check-success=build"
+      - "check-success=lint"
+    actions:
+      merge:
+        method: merge
