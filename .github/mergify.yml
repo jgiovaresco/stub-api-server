@@ -1,7 +1,7 @@
 pull_request_rules:
   - name: Automatic merge ⬇️ renovate PR
     conditions:
-      - "body~=/[Automerge: Enabled/]"
+      - "#approved-reviews-by>=1"
       - "author=renovate[bot]"
       - "check-success=test"
       - "check-success=build"
